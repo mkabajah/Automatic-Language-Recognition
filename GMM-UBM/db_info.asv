@@ -1,0 +1,82 @@
+function [dir_in, dir_out, in_files] = db_info(tag_out,tag_in)
+
+if nargin < 1
+    tag_out='fir38';
+end
+if nargin < 2
+    tag_in='wav';
+end
+dir_in = cell(14);
+dir_out = cell(14);
+in_files = cell(14);
+%num_files = cell(12);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Arabic
+dir_in{1} = ['C:\Users\TL\Desktop\Voice Recognition and Identification System\train\CF Training Sets\Arabic\',tag_in,'\'];
+dir_out{1} = ['C:\Users\TL\Desktop\Voice Recognition and Identification System\train\CF Training Sets\Arabic\',tag_out,'\'];
+in_files{1} = 'arabic.txt';
+
+%Cornwall
+dir_in{2} = ['I:\ABI_1\Training\crn\',tag_in,'\'];
+dir_out{2} = ['I:\ABI_1\Training\crn\',tag_out,'\'];
+in_files{2} = 'crn.txt';
+
+%East Anglia
+dir_in{3} = ['I:\ABI_1\Training\ean\',tag_in,'\'];
+dir_out{3} = ['I:\ABI_1\Training\ean\',tag_out,'\'];
+in_files{3} = 'ean.txt';
+
+%East Yorkshire
+dir_in{4} = ['I:\ABI_1\Training\eyk\',tag_in,'\'];
+dir_out{4} = ['I:\ABI_1\Training\eyk\',tag_out,'\'];
+in_files{4} = 'eyk.txt';
+
+%Glasgow
+dir_in{5} = ['I:\ABI_1\Training\gla\',tag_in,'\'];
+dir_out{5} = ['I:\ABI_1\Training\gla\',tag_out,'\'];
+in_files{5} = 'gla.txt';
+
+%Inner London
+dir_in{6} = ['I:\ABI_1\Training\ilo\',tag_in,'\'];
+dir_out{6} = ['I:\ABI_1\Training\ilo\',tag_out,'\'];
+in_files{6} = 'ilo.txt';
+
+%Lancashire
+dir_in{7} = ['I:\ABI_1\Training\lan\',tag_in,'\'];
+dir_out{7} = ['I:\ABI_1\Training\lan\',tag_out,'\'];
+in_files{7} = 'lan.txt';
+
+%Liverpool
+dir_in{8} = ['I:\ABI_1\Training\lvp\',tag_in,'\'];
+dir_out{8} = ['I:\ABI_1\Training\lvp\',tag_out,'\'];
+in_files{8} = 'lvp.txt';
+
+%Newcastle
+dir_in{9} = ['I:\ABI_1\Training\ncl\',tag_in,'\'];
+dir_out{9} = ['I:\ABI_1\Training\ncl\',tag_out,'\'];
+in_files{9} = 'ncl.txt';
+
+%North Wales
+dir_in{10} = ['I:\ABI_1\Training\nwa\',tag_in,'\'];
+dir_out{10} = ['I:\ABI_1\Training\nwa\',tag_out,'\'];
+in_files{10} = 'nwa.txt';
+
+%Republic of Ireland
+dir_in{11} = ['I:\ABI_1\Training\roi\',tag_in,'\'];
+dir_out{11} = ['I:\ABI_1\Training\roi\',tag_out,'\'];
+in_files{11} = 'roi.txt';
+
+%Scottish Highlands
+dir_in{12} = ['I:\ABI_1\Training\shl\',tag_in,'\'];
+dir_out{12} = ['I:\ABI_1\Training\shl\',tag_out,'\'];
+in_files{12} = 'shl.txt';
+
+%Standard South English
+dir_in{13} = ['I:\ABI_1\Training\sse\',tag_in,'\'];
+dir_out{13} = ['I:\ABI_1\Training\sse\',tag_out,'\'];
+in_files{13} = 'sse.txt';
+
+%Ulster
+dir_in{14} = ['I:\ABI_1\Training\uls\',tag_in,'\'];
+dir_out{14} = ['I:\ABI_1\Training\uls\',tag_out,'\'];
+in_files{14} = 'uls.txt';
