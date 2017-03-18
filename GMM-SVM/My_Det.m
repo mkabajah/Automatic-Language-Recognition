@@ -1,0 +1,68 @@
+function EER = My_Det(target,no_det)
+%------------------------------
+%target ==> path to two score files
+%
+%
+if nargin < 1
+   target = 'C:\LID\NIST Test\lid96d1\MFCC';
+end
+if nargin < 2
+ no_det = 0;
+end
+ft= fopen([target,'\true_lang_svm.dat'],'r');
+true_speaker_scores = fread(ft, 'float');
+fclose(ft);
+
+fp =fopen([target,'\imposter_lang_svm.dat'],'r');
+impostor_scores = fread(fp, 'float');
+fclose(fp);
+
+true_speaker_scores=true_speaker_scores(~isnan(true_speaker_scores));
+impostor_scores=impostor_scores(~isnan(impostor_scores));
+%load true_speaker_scores
+%load impostor_scores
+%------------------------------
+%initialize the DCF parameters
+Set_DCF (10, 1, 0.01);
+
+%------------------------------
+%compute Pmiss and Pfa from experimental detection output scores
+[P_miss,P_fa] = Compute_DET (true_speaker_scores, impostor_scores);
+
+%------------------------------
+%plot results
+
+% Set tic marks
+Pmiss_min = 0.005;% 0.01;
+Pmiss_max = 0.45;
+Pfa_min =  0.005;% 0.01;
+Pfa_max = 0.45;
+Set_DET_limits(Pmiss_min,Pmiss_max,Pfa_min,Pfa_max);
+
+if no_det == 0
+%call figure, plot DET-curve
+figure;
+Plot_DET (P_miss, P_fa,'r');
+title ('Language Detection Performance');
+hold on;
+
+%find lowest cost point and plot
+C_miss = 1;
+C_fa = 1;
+P_target = 0.5;
+Set_DCF(C_miss,C_fa,P_target);
+[DCF_opt Popt_miss Popt_fa] = Min_DCF(P_miss,P_fa);
+Plot_DET(Popt_miss,Popt_fa,'ko');
+end
+[EER,confInterEER]=EER_DET_conf(true_speaker_scores,impostor_scores,0.5,10000);
+
+fprintf('EER = %f  , 90ConfInterEER = %f \n',EER,confInterEER);
+fprintf('no of tests  = %d\n',length(true_speaker_scores));
+
+Nt = length(true_speaker_scores);
+Ni = length(impostor_scores); 
+Nc = Ni/Nt;
+scores = [true_speaker_scores,reshape(impostor_scores,Nc,Nt)'];
+[~,idx] = max(scores,[],2);
+Acc = sum(idx==1)*100/Nt;
+fprintf('Accuracy is %f percent\n',Acc);
